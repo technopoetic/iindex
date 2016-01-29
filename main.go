@@ -17,7 +17,7 @@ type Doc struct {
 	Title string
 }
 
-func MakeIndex(path string) (map[string][]int, error) {
+func IndexDirectory(path string) (map[string][]int, error) {
 	// initialize representation
 	Index = make(map[string][]int)
 
@@ -40,11 +40,11 @@ func indexDir(dir string) error {
 	if len(fis) == 0 {
 		return fmt.Errorf("no files in %s", dir)
 	}
-	indexed := 0
+	Indexed := 0
 	for _, fi := range fis {
 		if !fi.IsDir() {
 			if indexFile(dir + "/" + fi.Name()) {
-				indexed++
+				Indexed++
 			}
 		}
 	}
@@ -84,8 +84,7 @@ func indexFile(fn string) bool {
 			pdoc.Title = string(b[7:])
 		}
 		// index line of text in b
-		// again, in a real program you would write a much
-		// nicer word splitter.
+		// TODO: Write a better word splitter
 	wordLoop:
 		for _, bword := range bytes.Fields(b) {
 			bword := bytes.Trim(bword, ".,-~?!\"'`;:()<>[]{}\\|/=_+*&^%$#@")
