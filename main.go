@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-// inverted index representation
+// inverted  index representation
 var Index map[string][]int // ints index into indexed
 var Indexed []Doc
 
